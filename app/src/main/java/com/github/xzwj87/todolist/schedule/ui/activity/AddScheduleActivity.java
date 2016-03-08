@@ -12,15 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.github.xzwj87.todolist.R;
+import com.github.xzwj87.todolist.schedule.interactor.AddSchedule;
+import com.github.xzwj87.todolist.schedule.interactor.mapper.ScheduleContentValuesDataMapper;
 import com.github.xzwj87.todolist.schedule.presenter.AddSchedulePresenter;
 import com.github.xzwj87.todolist.schedule.presenter.AddSchedulePresenterImpl;
 import com.github.xzwj87.todolist.schedule.ui.AddScheduleView;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,11 +34,6 @@ public class AddScheduleActivity extends AppCompatActivity
     private static final String START_TIME_PICK_DLG_TAG = "start_date_pick_dlg";
     private static final String END_TIME_PICK_DLG_TAG = "end_date_pick_dlg";
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("E MMM d, yyyy");
-    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("kk:mm");
-
-    private Calendar mScheduleStart;
-    private Calendar mScheduleEnd;
     private AddSchedulePresenter mAddSchedulePresenter;
 
     @Bind(R.id.edit_schedule_title) EditText mEditScheduleTitle;
@@ -83,7 +77,9 @@ public class AddScheduleActivity extends AppCompatActivity
     }
 
     private void initialize() {
-        mAddSchedulePresenter = new AddSchedulePresenterImpl();
+        AddSchedule addSchedule = new AddSchedule();
+        ScheduleContentValuesDataMapper mapper = new ScheduleContentValuesDataMapper();
+        mAddSchedulePresenter = new AddSchedulePresenterImpl(addSchedule, mapper);
         mAddSchedulePresenter.setView(this);
     }
 

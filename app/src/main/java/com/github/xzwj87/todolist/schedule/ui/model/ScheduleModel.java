@@ -30,7 +30,7 @@ public class ScheduleModel {
     @Retention(RetentionPolicy.SOURCE)
     public @interface ScheduleRepeatType {}
 
-    private int mId;
+    private long mId;
 
     private String mTitle;
     private String mDetail;
@@ -44,11 +44,11 @@ public class ScheduleModel {
     private int mRepeatAlarmTimes;
     private int mRepeatAlarmInterval;
 
-    public int getId() {
+    public long getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.mId = id;
     }
 
@@ -126,4 +126,17 @@ public class ScheduleModel {
         this.mRepeatAlarmInterval = repeatAlarmInterval;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("***** ScheduleModel Details *****\n");
+        stringBuilder.append("id = " + mId + "\n");
+        stringBuilder.append("title = " + mTitle + "\n");
+        stringBuilder.append("start = " + mScheduleStart + "\n");
+        stringBuilder.append("end = " + mScheduleEnd + "\n");
+        stringBuilder.append("alarm = " + mAlarmTime + "\n");
+
+        return stringBuilder.toString();
+    }
 }
